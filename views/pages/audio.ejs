@@ -7,7 +7,16 @@
 </head>
 
 <body>
+
+    <label class="start" for="file-upload" class="custom-file-upload">
+        Your file
+    </label>
+    <input class="start" id="file-upload" type="file"/>
+
+    <button class="start" onclick="start()" id="Start">Start</button>
+
     <script src="three.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript">
         var camera, scene, renderer;
         var geometry, material, mesh;
@@ -15,9 +24,31 @@
         var data;
         var analyser;
         var arraydata;
+        var path;
 
-        init();
-        animate();
+        $("#file-upload").change(function() {
+          console.log(this.files)
+
+
+            // generate a new FileReader object
+              var reader = new FileReader();
+
+              // inject an image with the src url
+              reader.onload = function(event) {
+                path = event.target.result;
+              }
+
+              // when the file is read it triggers the onload event above.
+              reader.readAsDataURL(this.files[0]);
+        });
+
+        function start(){
+            $('.start').css('display','none');
+
+            init();
+            animate();
+
+        }
 
         function init() {
 
@@ -132,6 +163,10 @@
 
             scene.add(particleSystem3);
 
+            var light = new THREE.PointLight( 0xff0000, 100, 100 );
+            light.position.set( 0, 0, 0 );
+            scene.add( light );
+
             // create an AudioListener and add it to the camera
             var listener = new THREE.AudioListener();
             camera.add(listener);
@@ -141,7 +176,7 @@
 
             // load a sound and set it as the Audio object's buffer
             var audioLoader = new THREE.AudioLoader();
-            audioLoader.load('lamathree.mp3', function (buffer) {
+            audioLoader.load(path, function (buffer) {
                 sound.setBuffer(buffer);
                 sound.setLoop(true);
                 sound.setVolume(0.5);
