@@ -12,6 +12,7 @@
 	var particleSystem;
 	var data;
 	var analyser;
+	var arraydata;
 
 	init();
 	animate();
@@ -27,7 +28,7 @@
 	    particles1 = new THREE.Geometry(),
 		pMaterial1 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
-			size: 1,
+			size: 2,
 			map: THREE.ImageUtils.loadTexture(
 				"flashBlue.png"
 			),
@@ -63,7 +64,7 @@
 	    particles2 = new THREE.Geometry(),
 		pMaterial2 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
-			size: 1,
+			size: 2,
 			map: THREE.ImageUtils.loadTexture(
 				"flashOrange.png"
 			),
@@ -98,7 +99,7 @@
 	    particles3 = new THREE.Geometry(),
 		pMaterial3 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
-			size: 1,
+			size: 2,
 			map: THREE.ImageUtils.loadTexture(
 				"flashPink.png"
 			),
@@ -161,11 +162,15 @@
 	function animate() {
 
 			// add some rotation to the system
-	  particleSystem1.rotation.y += 0.001;
-	  particleSystem2.rotation.y += 0.001;
-	  particleSystem3.rotation.y += 0.001;
 
-	  console.log(analyser.getFrequencyData());
+	  arraydata = analyser.getFrequencyData();
+
+	  particleSystem1.rotation.y += arraydata[3]/1000;
+	   particleSystem2.rotation.y += arraydata[2]/1000;
+	  particleSystem3.rotation.y += arraydata[1]/1000;
+
+	  console.log(arraydata[1]);
+
 
 	  // draw
 	  renderer.render(scene, camera);
