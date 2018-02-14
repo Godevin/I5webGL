@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Les particules de la création</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <script src="three.min.js"></script>
+    <script type="text/javascript">
+        var camera, scene, renderer;
+        var geometry, material, mesh;
+        var particleSystem;
+        var data;
+        var analyser;
+        var arraydata;
+
+        init();
+        animate();
+
+        function init() {
+
+            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 70);
+            camera.position.z = 20;
+
+            scene = new THREE.Scene();
+
+            var particleCount1 = 5000,
+                particles1 = new THREE.Geometry(),
+                pMaterial1 = new THREE.PointsMaterial({
+                    color: 0xFFFFFF,
+                    size: 2,
+                    map: THREE.ImageUtils.loadTexture(
+                        "flashBlue.png"
+                    ),
+                    transparent: true,
+                    depthWrite: true,
+                    blending: THREE.AdditiveBlending,
+                });
+            // now create the individual particles
+            for (var p = 0; p < particleCount1; p++) {
+
+                // create a particle with random
+                // position values, -250 -> 250
+                var pX = Math.random() * 500 - 250,
+                    pY = Math.random() * 500 - 250,
+                    pZ = Math.random() * 500 - 250,
+                    particle1 =
+                        new THREE.Vector3(pX, pY, pZ);
+
+                // add it to the geometry
+                particles1.vertices.push(particle1);
+            }
+
+            particleSystem1 = new THREE.ParticleSystem(
+                particles1,
+                pMaterial1);
+
+            particleSystem1.sortParticles = true;
+
+            scene.add(particleSystem1);
+
+
+            var particleCount2 = 2500,
+                particles2 = new THREE.Geometry(),
+                pMaterial2 = new THREE.PointsMaterial({
+                    color: 0xFFFFFF,
+                    size: 2,
+                    map: THREE.ImageUtils.loadTexture(
+                        "flashOrange.png"
+                    ),
+                    transparent: true,
+                    depthWrite: true,
+                    blending: THREE.AdditiveBlending,
+                });
+            // now create the individual particles
+            for (var p = 0; p < particleCount2; p++) {
+
+                // create a particle with random
+                // position values, -250 -> 250
+                var pX = Math.random() * 500 - 250,
+                    pY = Math.random() * 500 - 250,
+                    pZ = Math.random() * 500 - 250,
+                    particle2 =
+                        new THREE.Vector3(pX, pY, pZ);
+
+                // add it to the geometry
+                particles2.vertices.push(particle2);
+            }
+
+            particleSystem2 = new THREE.ParticleSystem(
+                particles2,
+                pMaterial2);
+
+            particleSystem2.sortParticles = true;
+
+            scene.add(particleSystem2);
+
+            var particleCount3 = 1500,
+                particles3 = new THREE.Geometry(),
+                pMaterial3 = new THREE.PointsMaterial({
+                    color: 0xFFFFFF,
+                    size: 2,
+                    map: THREE.ImageUtils.loadTexture(
+                        "flashPink.png"
+                    ),
+                    transparent: true,
+                    depthWrite: true,
+                    blending: THREE.AdditiveBlending,
+                });
+            // now create the individual particles
+            for (var p = 0; p < particleCount3; p++) {
+
+                // create a particle with random
+                // position values, -250 -> 250
+                var pX = Math.random() * 500 - 250,
+                    pY = Math.random() * 500 - 250,
+                    pZ = Math.random() * 500 - 250,
+                    particle3 =
+                        new THREE.Vector3(pX, pY, pZ);
+
+                // add it to the geometry
+                particles3.vertices.push(particle3);
+            }
+
+            particleSystem3 = new THREE.ParticleSystem(
+                particles3,
+                pMaterial3);
+
+            particleSystem3.sortParticles = true;
+
+            scene.add(particleSystem3);
+
+            // create an AudioListener and add it to the camera
+            var listener = new THREE.AudioListener();
+            camera.add(listener);
+
+            // create an Audio source
+            var sound = new THREE.Audio(listener);
+
+            // load a sound and set it as the Audio object's buffer
+            var audioLoader = new THREE.AudioLoader();
+            audioLoader.load('lamaone.mp3', function (buffer) {
+                sound.setBuffer(buffer);
+                sound.setLoop(true);
+                sound.setVolume(0.5);
+                sound.play();
+            });
+
+            // create an AudioAnalyser, passing in the sound and desired fftSize
+            analyser = new THREE.AudioAnalyser(sound, 32);
+
+            // get the average frequency of the sound
+            data = analyser.getAverageFrequency();
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setClearColor(new THREE.Color(0, 0));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+        }
+
+        function animate() {
+
+            // add some rotation to the system
+
+            arraydata = analyser.getFrequencyData();
+
+            particleSystem1.rotation.y += arraydata[4] / 5000;
+            particleSystem2.rotation.y -= arraydata[3] / 5000;
+            particleSystem3.rotation.y += arraydata[1] / 5000;
+
+            if (particleSystem1['material'].size > 4) {
+                particleSystem1['material'].size -= arraydata[4] / 50;
+                particleSystem1['material'].size -= arraydata[4] / 100;
+                particleSystem1['material'].size -= arraydata[4] / 100;
+            }
+            else {
+                particleSystem1['material'].size += arraydata[4] / 100;
+            }
+
+            // draw
+            renderer.render(scene, camera);
+
+            // set up the next call
+            requestAnimationFrame(animate);
+
+
+        }
+
+        window.addEventListener('resize', onWindowResize, false);
+
+        function onWindowResize() {
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+        }
+    </script>
+</body>
+
+</html>

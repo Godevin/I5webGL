@@ -1,0 +1,50 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>Tweeeeeeeeeets</h1>
+            <div id="tweets"></div>
+        </div>
+
+        <script src="/js/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io.connect('/'),
+                tweets = document.getElementById('tweets');
+            var queue = [];
+
+            socket.on('tweet', function (data) {
+
+                if (queue.length < 5) {
+                    queue.push(data);
+                    tweets.innerHTML = tweets.innerHTML + '<br>' + data.user + ' :  ' + data.location + ' : ' + data.tweet;
+                } else {
+                    queue.shift();
+                    tweets.innerHTML = tweets.innerHTML.substring(tweets.innerHTML.indexOf('<br>') + 4);
+                }
+                console.log(queue.length)
+                window.scrollTo(0, document.body.scrollHeight);
+
+            });
+        </script>
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+
+</html>
