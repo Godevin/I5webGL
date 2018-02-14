@@ -2,12 +2,28 @@
 <html>
 
 <head>
-    <title>Les particules de la création</title>
+    <title>Les particules de la creation</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div class="container">
+        <div class="center">
+            <div style="margin-top: 30vh;">
+                <h5 class="textIntro"><p>Audio Analyzer</p></h5>
+            </div>
+            <label for="file-upload" class="custom-file-upload">
+                Your file
+            </label>
+            <input id="file-upload" type="file"/>
+
+            <button class="start" onclick="start()" id="Start" disabled>Start</button>
+        </div>
+    </div>
+
+
     <script src="three.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript">
         var camera, scene, renderer;
         var geometry, material, mesh;
@@ -15,9 +31,55 @@
         var data;
         var analyser;
         var arraydata;
+        var path;
+        var start;
+        var sound;
+        var isStop=false;
+        var newaction = false;
 
-        init();
-        animate();
+        $("#file-upload").change(function() {
+          console.log(this.files)
+
+
+            // generate a new FileReader object
+              var reader = new FileReader();
+
+              // inject an image with the src url
+              reader.onload = function(event) {
+                path = event.target.result;
+              }
+
+              // when the file is read it triggers the onload event above.
+              reader.readAsDataURL(this.files[0]);
+
+              $('.start').prop('disabled', false);
+        });
+
+        function start(){
+             $( ".container" ).fadeOut( "slow", function() {
+                $('.container').css('display','none');
+
+                 $("body").click(function(){
+                    newaction = true;
+                    if(isStop == false){
+                        isStop = true;
+                    }
+                    else{
+                            isStop = false;
+                        }
+                    });
+              });
+
+
+
+            start=true;
+            init();
+            animate();
+
+        
+
+
+        }
 
         function init() {
 
@@ -132,18 +194,22 @@
 
             scene.add(particleSystem3);
 
+            var light = new THREE.PointLight( 0xff0000, 100, 100 );
+            light.position.set( 0, 0, 0 );
+            scene.add( light );
+
             // create an AudioListener and add it to the camera
             var listener = new THREE.AudioListener();
             camera.add(listener);
 
             // create an Audio source
-            var sound = new THREE.Audio(listener);
+            sound = new THREE.Audio(listener);
 
             // load a sound and set it as the Audio object's buffer
             var audioLoader = new THREE.AudioLoader();
-            audioLoader.load('lamatwo.mp3', function (buffer) {
+            audioLoader.load(path, function (buffer) {
                 sound.setBuffer(buffer);
-                sound.setLoop(true);
+                sound.setLoop(false);
                 sound.setVolume(0.5);
                 sound.play();
             });
@@ -180,6 +246,16 @@
                 particleSystem1['material'].size += arraydata[4] / 100;
             }
 
+            if(newaction){
+                if (isStop == true){
+                    sound.pause();
+                }
+                else{
+                    sound.play();
+                }
+                newaction=false;
+            }
+
             // draw
             renderer.render(scene, camera);
 
@@ -193,10 +269,13 @@
 
         function onWindowResize() {
 
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+            if (start==true) {
 
-            renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
 
         }
     </script>
