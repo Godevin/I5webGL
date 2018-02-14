@@ -19,7 +19,7 @@
 
 	function init() {
 
-		camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );
+		camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 60 );
 		camera.position.z = 50;
 
 		scene = new THREE.Scene();
@@ -60,7 +60,7 @@
 		scene.add(particleSystem1);
 
 
-		var particleCount2 = 5000,
+		var particleCount2 = 2500,
 	    particles2 = new THREE.Geometry(),
 		pMaterial2 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
@@ -95,7 +95,7 @@
 
 		scene.add(particleSystem2);
 
-		var particleCount3 = 5000,
+		var particleCount3 = 2500,
 	    particles3 = new THREE.Geometry(),
 		pMaterial3 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
@@ -165,9 +165,9 @@
 
 	  arraydata = analyser.getFrequencyData();
 
-	  particleSystem1.rotation.y += arraydata[3]/1000;
-	   particleSystem2.rotation.y -= arraydata[2]/1000;
-	  particleSystem3.rotation.y += arraydata[1]/1000;
+	  particleSystem1.rotation.y += arraydata[3]/5000;
+	   particleSystem2.rotation.y -= arraydata[2]/5000;
+	  particleSystem3.rotation.y += arraydata[1]/5000;
 
 	  console.log(arraydata[1]);
 
