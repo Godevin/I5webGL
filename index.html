@@ -19,8 +19,8 @@
 
 	function init() {
 
-		camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 60 );
-		camera.position.z = 50;
+		camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 70 );
+		camera.position.z = 20;
 
 		scene = new THREE.Scene();
 
@@ -96,6 +96,7 @@
 		scene.add(particleSystem2);
 
 		var particleCount3 = 50000,
+
 	    particles3 = new THREE.Geometry(),
 		pMaterial3 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
@@ -165,13 +166,18 @@
 
 	  arraydata = analyser.getFrequencyData();
 
-	  particleSystem1.rotation.y += arraydata[3]/5000;
-      particleSystem1.rotation.x -= arraydata[3]/2000;
-      particleSystem2.rotation.y -= arraydata[2]/5000;
-	  particleSystem3.rotation.x += arraydata[1]/1000;
+	  particleSystem1.rotation.y += arraydata[4]/5000;
+	   particleSystem2.rotation.y -= arraydata[3]/5000;
+	  particleSystem3.rotation.y += arraydata[1]/5000;
 
-	  //console.log(arraydata[1]);
-
+	  if(particleSystem1['material'].size > 4){
+	  	particleSystem1['material'].size -= arraydata[4]/50;
+	  	particleSystem1['material'].size -= arraydata[4]/100;
+	  	particleSystem1['material'].size -= arraydata[4]/100;
+	  }
+	  else{
+	  	particleSystem1['material'].size += arraydata[4]/100;
+	  }
 
 	  // draw
 	  renderer.render(scene, camera);
