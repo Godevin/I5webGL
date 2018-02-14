@@ -85,14 +85,13 @@
 
             scene = new THREE.Scene();
 
+
             var particleCount1 = 5000,
                 particles1 = new THREE.Geometry(),
                 pMaterial1 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
-                    size: 2,
-                    map: THREE.ImageUtils.loadTexture(
-                        "flashBlue.png"
-                    ),
+                    size: 10,
+                    map: new THREE.TextureLoader().load("flashBlue.png"),
                     transparent: true,
                     depthWrite: true,
                     blending: THREE.AdditiveBlending,
@@ -112,7 +111,7 @@
                 particles1.vertices.push(particle1);
             }
 
-            particleSystem1 = new THREE.ParticleSystem(
+            particleSystem1 = new THREE.Points(
                 particles1,
                 pMaterial1);
 
@@ -126,9 +125,7 @@
                 pMaterial2 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
                     size: 2,
-                    map: THREE.ImageUtils.loadTexture(
-                        "flashOrange.png"
-                    ),
+                    map: new THREE.TextureLoader().load('flashOrange.png'),
                     transparent: true,
                     depthWrite: true,
                     blending: THREE.AdditiveBlending,
@@ -148,7 +145,7 @@
                 particles2.vertices.push(particle2);
             }
 
-            particleSystem2 = new THREE.ParticleSystem(
+            particleSystem2 = new THREE.Points(
                 particles2,
                 pMaterial2);
 
@@ -161,9 +158,7 @@
                 pMaterial3 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
                     size: 2,
-                    map: THREE.ImageUtils.loadTexture(
-                        "flashPink.png"
-                    ),
+                    map: new THREE.TextureLoader().load('flashPink.png'),
                     transparent: true,
                     depthWrite: true,
                     blending: THREE.AdditiveBlending,
@@ -183,7 +178,7 @@
                 particles3.vertices.push(particle3);
             }
 
-            particleSystem3 = new THREE.ParticleSystem(
+            particleSystem3 = new THREE.Points(
                 particles3,
                 pMaterial3);
 
@@ -217,7 +212,7 @@
             // get the average frequency of the sound
             data = analyser.getAverageFrequency();
 
-            renderer = new THREE.WebGLRenderer( { alpha:true } );
+            renderer = new THREE.WebGLRenderer( { alpha:true, premultipliedAlpha:false } );
             renderer.setClearColor(new THREE.Color(0, 0));
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
@@ -235,7 +230,7 @@
             particleSystem3.rotation.y += arraydata[1] / 5000;
 
             if (arraydata[2] >= 220 && particleSystem1['material'].size <= 6) {
-                particleSystem1['material'].size += 2;
+                particleSystem1['material'].size += 1;
             }
             else {
                 particleSystem1['material'].size = 1;
