@@ -7,13 +7,20 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="center">
+            <div style="margin-top: 30vh;">
+                <h5 class="textIntro"><p>Audio Analyzer</p></h5>
+            </div>
+            <label for="file-upload" class="custom-file-upload">
+                Your file
+            </label>
+            <input id="file-upload" type="file"/>
 
-    <label class="start" for="file-upload" class="custom-file-upload">
-        Your file
-    </label>
-    <input class="start" id="file-upload" type="file"/>
+            <button class="start" onclick="start()" id="Start" disabled>Start</button>
+        </div>
+    </div>
 
-    <button class="start" onclick="start()" id="Start">Start</button>
 
     <script src="three.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -25,6 +32,7 @@
         var analyser;
         var arraydata;
         var path;
+        var start;
 
         $("#file-upload").change(function() {
           console.log(this.files)
@@ -40,11 +48,16 @@
 
               // when the file is read it triggers the onload event above.
               reader.readAsDataURL(this.files[0]);
+
+              $('.start').prop('disabled', false);
         });
 
         function start(){
-            $('.start').css('display','none');
-
+             $( ".container" ).fadeOut( "slow", function() {
+                $('.container').css('display','none');
+              });
+            
+            start=true;
             init();
             animate();
 
@@ -228,10 +241,13 @@
 
         function onWindowResize() {
 
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+            if (start==true) {
 
-            renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
 
         }
     </script>
