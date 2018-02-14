@@ -10,13 +10,15 @@
 	var camera, scene, renderer;
 	var geometry, material, mesh;
 	var particleSystem;
+	var data;
+	var analyser;
 
 	init();
 	animate();
 
 	function init() {
 
-		camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 50 );
+		camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );
 		camera.position.z = 50;
 
 		scene = new THREE.Scene();
@@ -127,6 +129,28 @@
 
 		scene.add(particleSystem3);
 
+				// create an AudioListener and add it to the camera
+		var listener = new THREE.AudioListener();
+		camera.add( listener );
+
+		// create an Audio source
+		var sound = new THREE.Audio( listener );
+
+		// load a sound and set it as the Audio object's buffer
+		var audioLoader = new THREE.AudioLoader();
+		audioLoader.load( 'lamaone.mp3', function( buffer ) {
+			sound.setBuffer( buffer );
+			sound.setLoop(true);
+			sound.setVolume(0.5);
+			sound.play();
+		});
+
+		// create an AudioAnalyser, passing in the sound and desired fftSize
+		analyser = new THREE.AudioAnalyser( sound, 32 );
+
+		// get the average frequency of the sound
+		data = analyser.getAverageFrequency();
+
 		renderer = new THREE.WebGLRenderer() ;
 		renderer.setClearColor(new THREE.Color(0, 0));
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -141,11 +165,14 @@
 	  particleSystem2.rotation.y += 0.001;
 	  particleSystem3.rotation.y += 0.001;
 
+	  console.log(analyser.getFrequencyData());
+
 	  // draw
 	  renderer.render(scene, camera);
 
 	  // set up the next call
 	  requestAnimationFrame(animate);
+
 
 	}
         
