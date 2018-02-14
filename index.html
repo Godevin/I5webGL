@@ -24,11 +24,11 @@
 
 		scene = new THREE.Scene();
 
-		var particleCount1 = 5000,
+		var particleCount1 = 50000,
 	    particles1 = new THREE.Geometry(),
 		pMaterial1 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
-			size: 2,
+			size: 3,
 			map: THREE.ImageUtils.loadTexture(
 				"flashBlue.png"
 			),
@@ -60,7 +60,7 @@
 		scene.add(particleSystem1);
 
 
-		var particleCount2 = 2500,
+		var particleCount2 = 50000,
 	    particles2 = new THREE.Geometry(),
 		pMaterial2 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
@@ -95,11 +95,11 @@
 
 		scene.add(particleSystem2);
 
-		var particleCount3 = 2500,
+		var particleCount3 = 50000,
 	    particles3 = new THREE.Geometry(),
 		pMaterial3 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
-			size: 2,
+			size: 1,
 			map: THREE.ImageUtils.loadTexture(
 				"flashPink.png"
 			),
@@ -142,7 +142,7 @@
 		audioLoader.load( 'lamaone.mp3', function( buffer ) {
 			sound.setBuffer( buffer );
 			sound.setLoop(true);
-			sound.setVolume(0.5);
+			sound.setVolume(5);
 			sound.play();
 		});
 
@@ -166,10 +166,11 @@
 	  arraydata = analyser.getFrequencyData();
 
 	  particleSystem1.rotation.y += arraydata[3]/5000;
-	   particleSystem2.rotation.y -= arraydata[2]/5000;
-	  particleSystem3.rotation.y += arraydata[1]/5000;
+      particleSystem1.rotation.x -= arraydata[3]/2000;
+      particleSystem2.rotation.y -= arraydata[2]/5000;
+	  particleSystem3.rotation.x += arraydata[1]/1000;
 
-	  console.log(arraydata[1]);
+	  //console.log(arraydata[1]);
 
 
 	  // draw
