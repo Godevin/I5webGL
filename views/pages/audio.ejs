@@ -236,11 +236,14 @@
             particleSystem2.rotation.y -= arraydata[3] / 5000;
             particleSystem3.rotation.y += arraydata[1] / 5000;
 
-            if (arraydata[2] >= 220 && particleSystem1['material'].size <= 6) {
-                particleSystem1['material'].size += 2;
+            console.log(arraydata)
+            
+            if (arraydata[1] >= 235 && particleSystem1['material'].size <= 6) {
+                particleSystem1['material'].size += 1;
             }
             else {
-                particleSystem1['material'].size = 1;
+                if(particleSystem1['material'].size > 2)
+                    particleSystem1['material'].size -= 1;
             }
 
             if(newaction){
