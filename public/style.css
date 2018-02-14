@@ -24,6 +24,11 @@ h5.textIntro p{
 	text-align: center;
 }
 
+@font-face {
+    font-family: streamster;
+    src: url(Streamster.ttf);
+}
+
 @keyframes neon {
    from {
     text-shadow: 0;

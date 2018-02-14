@@ -41,18 +41,17 @@
           console.log(this.files)
 
 
-            // generate a new FileReader object
+              // generate a new FileReader object
               var reader = new FileReader();
 
               // inject an image with the src url
               reader.onload = function(event) {
                 path = event.target.result;
+                $('.start').prop('disabled', false);
               }
+             
+               reader.readAsDataURL(this.files[0]);
 
-              // when the file is read it triggers the onload event above.
-              reader.readAsDataURL(this.files[0]);
-
-              $('.start').prop('disabled', false);
         });
 
         function start(){
