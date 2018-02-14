@@ -36,6 +36,8 @@
         var sound;
         var isStop=false;
         var blueRotate = "plus";
+        var orangeRotate = "minus";
+        var pinkRotate = "plus";
         var newaction = false;
 
         $("#file-upload").change(function() {
@@ -81,13 +83,13 @@
 
         function init() {
 
-            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 70);
-            camera.position.z = 20;
+            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 150);
+            camera.position.z = 50;
 
             scene = new THREE.Scene();
 
 
-            var particleCount1 = 5000,
+            var particleCount1 = 3000,
                 particles1 = new THREE.Geometry(),
                 pMaterial1 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
@@ -226,24 +228,18 @@
 
             arraydata = analyser.getFrequencyData();
 
-            console.log(blueRotate)
-            
+            // Blue particles rotation & sizing
             if(blueRotate == "plus"){
-                particleSystem1.rotation.y += arraydata[4] / 5000;
-                particleSystem1.rotation.x -= arraydata[4] / 10000;
+                particleSystem1.rotation.y += arraydata[1] / 15000;
+                particleSystem1.rotation.x -= arraydata[1] / 20000;
             }
                     
-            
             if(blueRotate == "minus"){
-                particleSystem1.rotation.y -= arraydata[4] / 5000;
-                particleSystem1.rotation.x += arraydata[4] / 10000;
+                particleSystem1.rotation.y -= arraydata[1] / 15000;
+                particleSystem1.rotation.x += arraydata[1] / 20000;
             }
-                    
-            particleSystem2.rotation.y -= arraydata[3] / 5000;
-            particleSystem3.rotation.y += arraydata[1] / 5000;
-
+            
             if (arraydata[1] >= 235 && particleSystem1['material'].size <= 6) {
-                
                 particleSystem1['material'].size += 1;
                 if(particleSystem1['material'].size == 6)
                     blueRotate = "minus"
@@ -254,6 +250,51 @@
                 if(particleSystem1['material'].size == 2)
                     blueRotate = "plus"
             }
+            
+            // Orange particles rotation & sizing
+            if(orangeRotate == "plus"){
+                particleSystem2.rotation.y += arraydata[4] / 10000;
+            }
+                    
+            if(orangeRotate == "minus"){
+                particleSystem2.rotation.y -= arraydata[4] / 10000;
+            }
+            
+            if (arraydata[4] >= 180 && particleSystem2['material'].size <= 6) {
+                
+                particleSystem2['material'].size += 1;
+                if(particleSystem2['material'].size == 6)
+                    orangeRotate = "plus"
+            }
+            else {
+                if(particleSystem2['material'].size > 2)
+                    particleSystem2['material'].size -= 1;
+                if(particleSystem2['material'].size == 2)
+                    orangeRotate = "minus"
+            }
+            
+            // Pink particles rotation & sizing
+            if(pinkRotate == "plus"){
+                particleSystem3.rotation.y += arraydata[6] / 10000;
+            }
+                    
+            if(pinkRotate == "minus"){
+                particleSystem3.rotation.y -= arraydata[6] / 10000;
+            }
+            
+            if (arraydata[6] >= 130 && particleSystem3['material'].size <= 6) {
+                particleSystem3['material'].size += 1;
+                if(particleSystem3['material'].size == 6)
+                    pinkRotate = "minus"
+            }
+            else {
+                if(particleSystem3['material'].size > 2)
+                    particleSystem3['material'].size -= 1;
+                if(particleSystem3['material'].size == 2)
+                    pinkRotate = "plus"
+            }
+            
+            
 
             if(newaction){
                 if (isStop == true){
