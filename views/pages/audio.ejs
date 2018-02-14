@@ -35,6 +35,7 @@
         var start;
         var sound;
         var isStop=false;
+        var blueRotate = "plus";
         var newaction = false;
 
         $("#file-upload").change(function() {
@@ -230,18 +231,32 @@
 
             arraydata = analyser.getFrequencyData();
 
-            particleSystem1.rotation.y += arraydata[4] / 5000;
+            console.log(blueRotate)
+            
+            if(blueRotate == "plus"){
+                particleSystem1.rotation.y += arraydata[4] / 5000;
+                particleSystem1.rotation.x -= arraydata[4] / 10000;
+            }
+                    
+            
+            if(blueRotate == "minus"){
+                particleSystem1.rotation.y -= arraydata[4] / 5000;
+                particleSystem1.rotation.x += arraydata[4] / 10000;
+            }
+                    
             particleSystem2.rotation.y -= arraydata[3] / 5000;
             particleSystem3.rotation.y += arraydata[1] / 5000;
 
-            console.log(arraydata)
-            
             if (arraydata[1] >= 235 && particleSystem1['material'].size <= 6) {
                 particleSystem1['material'].size += 1;
+                if(particleSystem1['material'].size == 6)
+                    blueRotate = "minus"
             }
             else {
                 if(particleSystem1['material'].size > 2)
                     particleSystem1['material'].size -= 1;
+                if(particleSystem1['material'].size == 2)
+                    blueRotate = "plus"
             }
 
             if(newaction){
