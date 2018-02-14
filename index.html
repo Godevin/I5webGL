@@ -17,12 +17,12 @@
 
 	function init() {
 
-		camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
+		camera = new THREE.PerspectiveCamera( 140, window.innerWidth / window.innerHeight, 0.01, 50 );
 		camera.position.z = 50;
 
 		scene = new THREE.Scene();
 
-		var particleCount1 = 500000,
+		var particleCount1 = 5000,
 	    particles1 = new THREE.Geometry(),
 		pMaterial1 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
@@ -58,7 +58,7 @@
 		scene.add(particleSystem1);
 
 
-		var particleCount2 = 500000,
+		var particleCount2 = 5000,
 	    particles2 = new THREE.Geometry(),
 		pMaterial2 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
@@ -93,7 +93,7 @@
 
 		scene.add(particleSystem2);
 
-		var particleCount3 = 500000,
+		var particleCount3 = 5000,
 	    particles3 = new THREE.Geometry(),
 		pMaterial3 = new THREE.PointsMaterial({
 			color: 0xFFFFFF,
@@ -149,6 +149,17 @@
 	  requestAnimationFrame(animate);
 
 	}
+        
+        window.addEventListener( 'resize', onWindowResize, false );
+
+        function onWindowResize(){
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(window.innerWidth, window.innerHeight );
+
+        }
 	</script>
 	</body>
 </html>
