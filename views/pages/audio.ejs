@@ -10,12 +10,14 @@
     <div class="container">
         <div class="center">
             <div style="margin-top: 30vh;">
-                <h5 class="textIntro"><p>Audio Analyzer</p></h5>
+                <h5 class="textIntro">
+                    <p>Audio Analyzer</p>
+                </h5>
             </div>
             <label for="file-upload" class="custom-file-upload">
                 Your file
             </label>
-            <input id="file-upload" type="file"/>
+            <input id="file-upload" type="file" />
 
             <button class="start" onclick="start()" id="Start" disabled>Start</button>
         </div>
@@ -34,59 +36,59 @@
         var path;
         var start;
         var sound;
-        var isStop=false;
+        var isStop = false;
         var blueRotate = "plus";
         var orangeRotate = "minus";
         var pinkRotate = "plus";
         var newaction = false;
 
-        $("#file-upload").change(function() {
-          console.log(this.files)
+        $("#file-upload").change(function () {
+            console.log(this.files)
 
 
-              // generate a new FileReader object
-              var reader = new FileReader();
+            // generate a new FileReader object
+            var reader = new FileReader();
 
-              // inject an image with the src url
-              reader.onload = function(event) {
+            // inject an image with the src url
+            reader.onload = function (event) {
                 path = event.target.result;
                 $('.start').prop('disabled', false);
-              }
-             
-               reader.readAsDataURL(this.files[0]);
+            }
+
+            reader.readAsDataURL(this.files[0]);
 
         });
 
-        function start(){
-             $( ".container" ).fadeOut( "slow", function() {
-                $('.container').css('display','none');
+        function start() {
+            $(".container").fadeOut("slow", function () {
+                $('.container').css('display', 'none');
 
-                 $("body").click(function(){
+                $("body").click(function () {
                     newaction = true;
-                    if(isStop == false){
+                    if (isStop == false) {
                         isStop = true;
                     }
-                    else{
-                            isStop = false;
-                        }
-                    });
-              });
-            
-            $('body').keyup(function(e){
-               if(e.keyCode == 32){
-                   newaction = true;
-                    if(isStop == false){
+                    else {
+                        isStop = false;
+                    }
+                });
+            });
+
+            $('body').keyup(function (e) {
+                if (e.keyCode == 32) {
+                    newaction = true;
+                    if (isStop == false) {
                         isStop = true;
                     }
-                    else{
-                            isStop = false;
-                        }
-               }
+                    else {
+                        isStop = false;
+                    }
+                }
             });
 
 
 
-            start=true;
+            start = true;
             init();
             animate();
 
@@ -201,9 +203,9 @@
 
             scene.add(particleSystem3);
 
-            var light = new THREE.PointLight( 0xff0000, 100, 100 );
-            light.position.set( 0, 0, 0 );
-            scene.add( light );
+            var light = new THREE.PointLight(0xff0000, 100, 100);
+            light.position.set(0, 0, 0);
+            scene.add(light);
 
             // create an AudioListener and add it to the camera
             var listener = new THREE.AudioListener();
@@ -227,7 +229,7 @@
             // get the average frequency of the sound
             data = analyser.getAverageFrequency();
 
-            renderer = new THREE.WebGLRenderer( { alpha:true, premultipliedAlpha:false } );
+            renderer = new THREE.WebGLRenderer({ alpha: true, premultipliedAlpha: false });
             renderer.setClearColor(0x000000, 0);
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
@@ -236,87 +238,87 @@
 
         function animate() {
 
-            
+
             // add some rotation to the system
 
             arraydata = analyser.getFrequencyData();
 
             // Blue particles rotation & sizing
-            if(blueRotate == "plus"){
+            if (blueRotate == "plus") {
                 particleSystem1.rotation.y += arraydata[1] / 15000;
                 particleSystem1.rotation.x -= arraydata[1] / 20000;
             }
-                    
-            if(blueRotate == "minus"){
+
+            if (blueRotate == "minus") {
                 particleSystem1.rotation.y -= arraydata[1] / 15000;
                 particleSystem1.rotation.x += arraydata[1] / 20000;
             }
-            
+
             if (arraydata[1] >= 235 && particleSystem1['material'].size <= 8) {
                 particleSystem1['material'].size += 1;
-                if(particleSystem1['material'].size == 8)
+                if (particleSystem1['material'].size == 8)
                     blueRotate = "minus"
             }
             else {
-                if(particleSystem1['material'].size > 4)
+                if (particleSystem1['material'].size > 4)
                     particleSystem1['material'].size -= 1;
-                if(particleSystem1['material'].size == 4)
+                if (particleSystem1['material'].size == 4)
                     blueRotate = "plus"
             }
-            
+
             // Orange particles rotation & sizing
-            if(orangeRotate == "plus"){
+            if (orangeRotate == "plus") {
                 particleSystem2.rotation.y += arraydata[4] / 10000;
             }
-                    
-            if(orangeRotate == "minus"){
+
+            if (orangeRotate == "minus") {
                 particleSystem2.rotation.y -= arraydata[4] / 10000;
             }
-            
+
             if (arraydata[4] >= 180 && particleSystem2['material'].size <= 8) {
-                
+
                 particleSystem2['material'].size += 1;
-                if(particleSystem2['material'].size == 8)
+                if (particleSystem2['material'].size == 8)
                     orangeRotate = "plus"
             }
             else {
-                if(particleSystem2['material'].size > 4)
+                if (particleSystem2['material'].size > 4)
                     particleSystem2['material'].size -= 1;
-                if(particleSystem2['material'].size == 4)
+                if (particleSystem2['material'].size == 4)
                     orangeRotate = "minus"
             }
-            
+
             // Pink particles rotation & sizing
-            if(pinkRotate == "plus"){
+            if (pinkRotate == "plus") {
                 particleSystem3.rotation.y += arraydata[6] / 10000;
             }
-                    
-            if(pinkRotate == "minus"){
+
+            if (pinkRotate == "minus") {
                 particleSystem3.rotation.y -= arraydata[6] / 10000;
             }
-            
+
             if (arraydata[6] >= 130 && particleSystem3['material'].size <= 8) {
                 particleSystem3['material'].size += 1;
-                if(particleSystem3['material'].size == 8)
+                if (particleSystem3['material'].size == 8)
                     pinkRotate = "minus"
             }
             else {
-                if(particleSystem3['material'].size > 4)
+                if (particleSystem3['material'].size > 4)
                     particleSystem3['material'].size -= 1;
-                if(particleSystem3['material'].size == 4)
+                if (particleSystem3['material'].size == 4)
                     pinkRotate = "plus"
             }
-            
-            
 
-            if(newaction){
-                if (isStop == true){
+
+
+            if (newaction) {
+                if (isStop == true) {
                     sound.pause();
                 }
-                else{
+                else {
                     sound.play();
                 }
-                newaction=false;
+                newaction = false;
             }
 
             // draw
@@ -332,7 +334,7 @@
 
         function onWindowResize() {
 
-            if (start==true) {
+            if (start == true) {
 
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();

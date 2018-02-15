@@ -14,31 +14,18 @@ var T = new Twit({
     access_token_secret: 'JWHBvUUPFuB212LI6fYggkt36uK1LkPzd3lf9keXVHqSK',
     timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
 })
+var paramTweetVar = 'trump';
 
-
-//
-// filter the public stream by english tweets containing `#apple`
-//
-var stream = T.stream('statuses/filter', { track: 'trump' })
+var stream = T.stream('statuses/filter', { track: paramTweetVar })
 
 var twee = io.of('tweet');
 
 stream.on('tweet', function (tweet) {
-    var coordinates = null
-    if (tweet.coordinates) {
-        coordinates = tweet.coordinates.coordinates.reverse();
-    }
-    else if (tweet.place) {
-        coordinates = util.getBoundingBoxCenter(tweet.place.bounding_box.coordinates[0]);
-    }
-
     io.sockets.emit('tweet', {
         user: tweet.user.screen_name,
         tweet: tweet.text,
-        location: coordinates
     });
 })
-
 ////// Serveur web
 
 // set the view engine to ejs
