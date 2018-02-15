@@ -83,8 +83,8 @@
 
         function init() {
 
-            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 150);
-            camera.position.z = 50;
+            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 120);
+            camera.position.z = 0;
 
             scene = new THREE.Scene();
 
@@ -93,7 +93,7 @@
                 particles1 = new THREE.Geometry(),
                 pMaterial1 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
-                    size: 10,
+                    size: 4,
                     map: new THREE.TextureLoader().load("flashBlue.png"),
                     transparent: true,
                     depthWrite: false,
@@ -127,7 +127,7 @@
                 particles2 = new THREE.Geometry(),
                 pMaterial2 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
-                    size: 2,
+                    size: 4,
                     map: new THREE.TextureLoader().load('flashOrange.png'),
                     transparent: true,
                     depthWrite: false,
@@ -160,7 +160,7 @@
                 particles3 = new THREE.Geometry(),
                 pMaterial3 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
-                    size: 2,
+                    size: 4,
                     map: new THREE.TextureLoader().load('flashPink.png'),
                     transparent: true,
                     depthWrite: false,
@@ -216,7 +216,7 @@
             data = analyser.getAverageFrequency();
 
             renderer = new THREE.WebGLRenderer( { alpha:true, premultipliedAlpha:false } );
-            renderer.setClearColor(new THREE.Color(0, 0));
+            renderer.setClearColor(0x000000, 0);
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
 
@@ -239,15 +239,15 @@
                 particleSystem1.rotation.x += arraydata[1] / 20000;
             }
             
-            if (arraydata[1] >= 235 && particleSystem1['material'].size <= 6) {
+            if (arraydata[1] >= 235 && particleSystem1['material'].size <= 8) {
                 particleSystem1['material'].size += 1;
-                if(particleSystem1['material'].size == 6)
+                if(particleSystem1['material'].size == 8)
                     blueRotate = "minus"
             }
             else {
-                if(particleSystem1['material'].size > 2)
+                if(particleSystem1['material'].size > 4)
                     particleSystem1['material'].size -= 1;
-                if(particleSystem1['material'].size == 2)
+                if(particleSystem1['material'].size == 4)
                     blueRotate = "plus"
             }
             
@@ -260,16 +260,16 @@
                 particleSystem2.rotation.y -= arraydata[4] / 10000;
             }
             
-            if (arraydata[4] >= 180 && particleSystem2['material'].size <= 6) {
+            if (arraydata[4] >= 180 && particleSystem2['material'].size <= 8) {
                 
                 particleSystem2['material'].size += 1;
-                if(particleSystem2['material'].size == 6)
+                if(particleSystem2['material'].size == 8)
                     orangeRotate = "plus"
             }
             else {
-                if(particleSystem2['material'].size > 2)
+                if(particleSystem2['material'].size > 4)
                     particleSystem2['material'].size -= 1;
-                if(particleSystem2['material'].size == 2)
+                if(particleSystem2['material'].size == 4)
                     orangeRotate = "minus"
             }
             
@@ -282,15 +282,15 @@
                 particleSystem3.rotation.y -= arraydata[6] / 10000;
             }
             
-            if (arraydata[6] >= 130 && particleSystem3['material'].size <= 6) {
+            if (arraydata[6] >= 130 && particleSystem3['material'].size <= 8) {
                 particleSystem3['material'].size += 1;
-                if(particleSystem3['material'].size == 6)
+                if(particleSystem3['material'].size == 8)
                     pinkRotate = "minus"
             }
             else {
-                if(particleSystem3['material'].size > 2)
+                if(particleSystem3['material'].size > 4)
                     particleSystem3['material'].size -= 1;
-                if(particleSystem3['material'].size == 2)
+                if(particleSystem3['material'].size == 4)
                     pinkRotate = "plus"
             }
             
