@@ -16,7 +16,7 @@
     <script type="text/javascript">
         //////////////settings/////////
         var movementSpeed = 80;
-        var totalObjects = 1000;
+        var totalObjects = 200;
         var objectSize = 10;
         var sizeRandomness = 4000;
         var colors = [0xFF0FFF, 0xCCFF00, 0xFF000F, 0x996600, 0xFFFFFF];
@@ -30,6 +30,8 @@
         camera.position.z = 1000;
 
         var scene = new THREE.Scene();
+
+
 
         function ExplodeAnimation(x, y) {
             var geometry = new THREE.Geometry();
@@ -55,10 +57,9 @@
 
             scene.add(this.object);
 
-
             //////
 
-            var loader = new THREE.FontLoader();
+            /*var loader = new THREE.FontLoader();
 
             loader.load('helvetiker_bold.typeface.json', function (font) {
 
@@ -78,7 +79,8 @@
                 mesh.position.set(x, y, 0);
                 
                 scene.add(mesh);
-            });
+
+            });*/
 
             /////
 

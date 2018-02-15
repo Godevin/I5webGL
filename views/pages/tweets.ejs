@@ -21,6 +21,7 @@
 
         <script src="/socket.io/socket.io.js"></script>
         <script>
+
             var socket = io.connect('/'),
                 tweets = document.getElementById('tweets');
             var queue = [];
@@ -29,7 +30,7 @@
 
                 if (queue.length < 5) {
                     queue.push(data);
-                    tweets.innerHTML = tweets.innerHTML + '<br>' + data.user + ' :  ' + data.location + ' : ' + data.tweet;
+                    tweets.innerHTML = tweets.innerHTML + '<br>' + data.user + ' : ' + data.tweet;
                 } else {
                     queue.shift();
                     tweets.innerHTML = tweets.innerHTML.substring(tweets.innerHTML.indexOf('<br>') + 4);
