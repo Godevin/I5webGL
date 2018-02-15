@@ -7,11 +7,22 @@ var util = require('./util');
 
 server.listen(3000)
 
-var T = new Twit({
+
+// Les clefs de COCO
+/*var T = new Twit({
     consumer_key: 'dbW9gin3u3RhmLB4nBNW5KwgX',
     consumer_secret: 'DAKiwwVYQpnO0HVu7zqAHWMCW1YBzRbMFidEU65feNifGDakih',
     access_token: '331633912-6Foh09Ya3pE1hGboFE60O5ZFsd8SL1qyZds746lL',
     access_token_secret: 'JWHBvUUPFuB212LI6fYggkt36uK1LkPzd3lf9keXVHqSK',
+    timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
+})*/
+
+// Les clefs de VAL
+var T = new Twit({
+    consumer_key: 'U1uP0lEqMm0mqPlUj4WzQxeno',
+    consumer_secret: 'UqHm8EyWeKof4mqela8KWBS6p12QrEeFzWOKBTUMmD2X73bIa7',
+    access_token: '969912715-gGJK0HV736SltNHtXln1LiXwgrrIWShMGM4Sji2A',
+    access_token_secret: '6BXiFoqL9gwYrXhi1ULTdvSBhHkxhnp0uTiQJa8EJ5iD8',
     timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
 })
 var paramTweetVar = 'trump';

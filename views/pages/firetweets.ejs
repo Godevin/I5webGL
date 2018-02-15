@@ -64,24 +64,20 @@
             loader.load('helvetiker_bold.typeface.json', function (font) {
 
                 var textGeo = new THREE.TextGeometry("My Text", {
-
                     font: font,
-
                     size: 200,
                     height: 50,
                     curveSegments: 12,
-
                     bevelThickness: 2,
                     bevelSize: 5,
                     bevelEnabled: true
-
                 });
 
                 var textMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 });
 
                 var mesh = new THREE.Mesh(textGeo, textMaterial);
                 mesh.position.set(x, y, 0);
-
+                
                 scene.add(mesh);
 
             });*/
