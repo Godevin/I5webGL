@@ -71,6 +71,18 @@
                         }
                     });
               });
+            
+            $('body').keyup(function(e){
+               if(e.keyCode == 32){
+                   newaction = true;
+                    if(isStop == false){
+                        isStop = true;
+                    }
+                    else{
+                            isStop = false;
+                        }
+               }
+            });
 
 
 
