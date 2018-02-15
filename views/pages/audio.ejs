@@ -254,7 +254,7 @@
                 particleSystem1.rotation.x += arraydata[1] / 20000;
             }
 
-            if (arraydata[1] >= 235 && particleSystem1['material'].size <= 8) {
+            if (arraydata[0] >= 235 && particleSystem1['material'].size <= 8) {
                 particleSystem1['material'].size += 1;
                 if (particleSystem1['material'].size == 8)
                     blueRotate = "minus"
@@ -275,7 +275,7 @@
                 particleSystem2.rotation.y -= arraydata[4] / 10000;
             }
 
-            if (arraydata[4] >= 180 && particleSystem2['material'].size <= 8) {
+            if (arraydata[2] >= 180 && particleSystem2['material'].size <= 8) {
 
                 particleSystem2['material'].size += 1;
                 if (particleSystem2['material'].size == 8)
@@ -297,7 +297,7 @@
                 particleSystem3.rotation.y -= arraydata[6] / 10000;
             }
 
-            if (arraydata[6] >= 130 && particleSystem3['material'].size <= 8) {
+            if (arraydata[3] >= 130 && particleSystem3['material'].size <= 8) {
                 particleSystem3['material'].size += 1;
                 if (particleSystem3['material'].size == 8)
                     pinkRotate = "minus"
@@ -308,6 +308,10 @@
                 if (particleSystem3['material'].size == 4)
                     pinkRotate = "plus"
             }
+
+            console.log(arraydata[3]);
+
+
 
 
 
