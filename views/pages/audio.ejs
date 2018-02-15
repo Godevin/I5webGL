@@ -71,6 +71,18 @@
                         }
                     });
               });
+            
+            $('body').keyup(function(e){
+               if(e.keyCode == 32){
+                   newaction = true;
+                    if(isStop == false){
+                        isStop = true;
+                    }
+                    else{
+                            isStop = false;
+                        }
+               }
+            });
 
 
 
@@ -89,7 +101,7 @@
             scene = new THREE.Scene();
 
 
-            var particleCount1 = 3000,
+            var particleCount1 = 30000,
                 particles1 = new THREE.Geometry(),
                 pMaterial1 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
@@ -123,7 +135,7 @@
             scene.add(particleSystem1);
 
 
-            var particleCount2 = 2500,
+            var particleCount2 = 25000,
                 particles2 = new THREE.Geometry(),
                 pMaterial2 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
@@ -156,7 +168,7 @@
 
             scene.add(particleSystem2);
 
-            var particleCount3 = 1500,
+            var particleCount3 = 15000,
                 particles3 = new THREE.Geometry(),
                 pMaterial3 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
@@ -224,6 +236,7 @@
 
         function animate() {
 
+            
             // add some rotation to the system
 
             arraydata = analyser.getFrequencyData();
