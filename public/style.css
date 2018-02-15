@@ -35,7 +35,7 @@ h5.textIntro p{
 
 @font-face {
     font-family: streamster;
-    src: url(Streamster.ttf);
+    src: url(./Streamster.ttf);
 }
 
 @keyframes neon {
