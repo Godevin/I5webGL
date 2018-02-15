@@ -96,9 +96,6 @@
         }
 
         function init() {
-            
-            document.getElementById('yolostronaut').style.display = 'block';
-
             camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 120);
             camera.position.z = 0;
 
@@ -230,6 +227,34 @@
 
             // get the average frequency of the sound
             data = analyser.getAverageFrequency();
+            
+            
+            //Astronaut
+            var objLoader = new THREE.OBJLoader();
+            
+            // load a resource
+            objLoader.load(
+                // resource URL
+                'model.obj',
+                // called when resource is loaded
+                function ( object ) {
+                    object.position.set(0,0,0);
+                    scene.add( object );
+
+                },
+                // called when loading is in progresses
+                function ( xhr ) {
+
+                    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+                },
+                // called when loading has errors
+                function ( error ) {
+
+                    console.log( 'An error happened' );
+
+                }
+            );
 
             renderer = new THREE.WebGLRenderer({ alpha: true, premultipliedAlpha: false });
             renderer.setClearColor(0x000000, 0);
@@ -289,7 +314,7 @@
                 if (particleSystem2['material'].size == 4)
                     orangeRotate = "minus"
             }
-
+            
             // Pink particles rotation & sizing
             if (pinkRotate == "plus") {
                 particleSystem3.rotation.y += arraydata[6] / 10000;
@@ -346,96 +371,6 @@
 
         }
     </script>
-    <div id="yolostronaut">
-        <div class="astronaut">
-			<div class="head">
-				<div class="glass">
-					<div class="reflect"></div>
-				</div>
-			</div>
-			<div class="neck"></div>
-			<div class="chest">
-				<div class="face-panel"></div>
-			</div>
-			<div class="back"></div>
-			<div class="arm left">
-				<div class="top-arm"></div>
-				<div class="bottom-arm"></div>
-				<div class="hand-left"></div>
-				<div class="finger"></div>
-				<div class="fingers"></div>
-			</div>
-			<div class="arm right">
-				<div class="top-arm"></div>
-				<div class="bottom-arm"></div>
-				<div class="hand-right"></div>
-				<div class="finger"></div>
-				<div class="fingers"></div>
-			</div>
-			
-			
-			<div class="bottom">
-				<div class="belt"></div>
-				<div class="line"></div>
-				<div class="line"></div>
-			</div>
-			<div class="leg left">
-				<div class="pant"></div>
-				<div class="tibia">
-					<div class="one"></div>
-					<div class="two"></div>
-				</div>
-				<div class="boot-left">
-					<div class="main">
-						<div class="boot-line"></div>
-					</div>
-					<div class="end"></div>
-					<div class="sole">
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-					</div>
-				</div>
-			</div>
-			<div class="leg right">
-				<div class="pant"></div>
-				<div class="tibia">
-					<div class="one"></div>
-					<div class="two"></div>
-				</div>
-				<div class="boot-right">
-					<div class="main">
-						<div class="boot-line"></div>
-					</div>
-					<div class="end"></div>
-					<div class="sole">
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-						<div class="crampon"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="curves">
-			<div class="curve1"></div>
-			<div class="curve2"></div>
-			<div class="curve3"></div>
-		</div>
-    </div>
     
 </body>
 
