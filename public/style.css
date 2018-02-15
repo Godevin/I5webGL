@@ -8,6 +8,10 @@ body{
     background-size: cover;
 }
 
+button[disabled]{
+    color:#000066;
+}
+
 .container{
     position: absolute;
     height: 100%;
