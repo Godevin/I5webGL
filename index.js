@@ -19,7 +19,7 @@ var T = new Twit({
 //
 // filter the public stream by english tweets containing `#apple`
 //
-var stream = T.stream('statuses/filter', { track: '#SaintValentin', language: 'fr' })
+var stream = T.stream('statuses/filter', { track: 'trump' })
 
 var twee = io.of('tweet');
 
@@ -51,6 +51,10 @@ app.get('/', function (req, res) {
 
 app.get('/tweets', function (req, res) {
     res.render('pages/tweets');
+})
+
+app.get('/firetweets', function (req, res) {
+    res.render('pages/firetweets');
 })
 
 app.get('/audio', function (req, res) {
