@@ -236,7 +236,6 @@
 
         function animate() {
 
-            
             // add some rotation to the system
 
             arraydata = analyser.getFrequencyData();
@@ -246,12 +245,12 @@
                 particleSystem1.rotation.y += arraydata[1] / 15000;
                 particleSystem1.rotation.x -= arraydata[1] / 20000;
             }
-                    
+
             if(blueRotate == "minus"){
                 particleSystem1.rotation.y -= arraydata[1] / 15000;
                 particleSystem1.rotation.x += arraydata[1] / 20000;
             }
-            
+
             if (arraydata[1] >= 235 && particleSystem1['material'].size <= 8) {
                 particleSystem1['material'].size += 1;
                 if(particleSystem1['material'].size == 8)
@@ -263,18 +262,18 @@
                 if(particleSystem1['material'].size == 4)
                     blueRotate = "plus"
             }
-            
+
             // Orange particles rotation & sizing
             if(orangeRotate == "plus"){
                 particleSystem2.rotation.y += arraydata[4] / 10000;
             }
-                    
+
             if(orangeRotate == "minus"){
                 particleSystem2.rotation.y -= arraydata[4] / 10000;
             }
-            
+
             if (arraydata[4] >= 180 && particleSystem2['material'].size <= 8) {
-                
+
                 particleSystem2['material'].size += 1;
                 if(particleSystem2['material'].size == 8)
                     orangeRotate = "plus"
@@ -285,16 +284,16 @@
                 if(particleSystem2['material'].size == 4)
                     orangeRotate = "minus"
             }
-            
+
             // Pink particles rotation & sizing
             if(pinkRotate == "plus"){
                 particleSystem3.rotation.y += arraydata[6] / 10000;
             }
-                    
+
             if(pinkRotate == "minus"){
                 particleSystem3.rotation.y -= arraydata[6] / 10000;
             }
-            
+
             if (arraydata[6] >= 130 && particleSystem3['material'].size <= 8) {
                 particleSystem3['material'].size += 1;
                 if(particleSystem3['material'].size == 8)
@@ -306,8 +305,7 @@
                 if(particleSystem3['material'].size == 4)
                     pinkRotate = "plus"
             }
-            
-            
+
 
             if(newaction){
                 if (isStop == true){
