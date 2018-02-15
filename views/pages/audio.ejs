@@ -25,6 +25,7 @@
 
 
     <script src="three.min.js"></script>
+    <script src="OBJLoader.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript">
         var camera, scene, renderer;
@@ -227,18 +228,15 @@
 
             // get the average frequency of the sound
             data = analyser.getAverageFrequency();
-            
-            
+
             //Astronaut
-            /*var objLoader = new THREE.OBJLoader();
-            
-            // load a resource
-            objLoader.load(
+
+          var astronaut = new THREE.OBJLoader().load(
                 // resource URL
                 'model.obj',
                 // called when resource is loaded
                 function ( object ) {
-                    object.position.set(0,0,0);
+
                     scene.add( object );
 
                 },
@@ -254,7 +252,7 @@
                     console.log( 'An error happened' );
 
                 }
-            );*/
+            );
 
             renderer = new THREE.WebGLRenderer({ alpha: true, premultipliedAlpha: false });
             renderer.setClearColor(0x000000, 0);
