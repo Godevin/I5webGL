@@ -102,14 +102,16 @@
 
         function init() {
             camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 120);
-            camera.position.z = 10;
+            camera.position.z = 20;
+            var pointLight = new THREE.PointLight( 0xcccccc, 0.8 );
+            pointLight.position.y += 50;
+            pointLight.position.z += -10;
+            camera.add( pointLight );
 
             scene = new THREE.Scene();
 
             var ambientLight = new THREE.AmbientLight( 0xffffff, 0.4 );
                 scene.add( ambientLight );
-                var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
-                camera.add( pointLight );
                 scene.add( camera )
 
 
@@ -267,8 +269,8 @@
                     objLoader.setPath( 'obj/' );
                     objLoader.load( 'redlegodude.obj', function ( object ) {
 
-                        object.position.z = 9;
-                        object.scale.set( 20, 20, 20)
+                        object.position.z = -100;
+                        object.scale.set( 1000, 1000, 1000);
 
                         scene.add( object );
                     }, onProgress, onError );
