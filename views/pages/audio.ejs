@@ -28,6 +28,7 @@
     <script src="OBJLoader.js"></script> 
     <script src="MTLLoader.js"></script> 
     <script src="DDSLoader.js"></script>
+    <script src="OrbitControls.js"></script>
 
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript">
@@ -69,15 +70,6 @@
             $(".container").fadeOut("slow", function () {
                 $('.container').css('display', 'none');
 
-                $("body").click(function () {
-                    newaction = true;
-                    if (isStop == false) {
-                        isStop = true;
-                    }
-                    else {
-                        isStop = false;
-                    }
-                });
             });
 
             $('body').keyup(function (e) {
@@ -108,6 +100,9 @@
             pointLight.position.y += 50;
             pointLight.position.z += -10;
             camera.add( pointLight );
+
+            var controls = new THREE.OrbitControls( camera );
+            controls.update();
 
             scene = new THREE.Scene();
 
@@ -158,6 +153,7 @@
                     map: new THREE.TextureLoader().load('flashOrange.png'),
                     transparent: true,
                     depthWrite: false,
+                    depthTest:true,
                     blending: THREE.AdditiveBlending,
                 });
             // now create the individual particles
@@ -269,8 +265,8 @@
                     objLoader.setMaterials( materials );
                     objLoader.setPath( 'obj/' );
                     objLoader.load( 'redlegodude-2.obj', function ( object ) {
-                        object.position.z = -60;
-                        object.scale.set( 500, 500, 500);
+                        object.position.z = -50;
+                        object.scale.set( 300, 300, 300);
 
                         scene.add( object );
                         astronaut = object;
@@ -377,7 +373,7 @@
                     if(astronaut.position.z >= 0){
                         come="true";
                     }
-                    if(astronaut.position.z <= -90){
+                    if(astronaut.position.z <= -80){
                         come="false";
                     }
 
