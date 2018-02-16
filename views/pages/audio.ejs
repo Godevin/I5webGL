@@ -25,7 +25,6 @@
 
 
     <script src="three.min.js"></script>
-    <script src="OBJLoader.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript">
         var camera, scene, renderer;
@@ -98,7 +97,7 @@
 
         function init() {
             camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 120);
-            camera.position.z = 0;
+            camera.position.z = 10;
 
             scene = new THREE.Scene();
 
@@ -229,28 +228,41 @@
             // get the average frequency of the sound
             data = analyser.getAverageFrequency();
 
+                
+            var onProgress = function ( xhr ) {
+					if ( xhr.lengthComputable ) {
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						console.log( Math.round(percentComplete, 2) + '% downloaded' );
+					}
+				};
+
+            var onError = function ( xhr ) { };
             //Astronaut
 
-          var astronaut = new THREE.OBJLoader().load(
+            var loader = new THREE.ObjectLoader();
+
+            loader.load(
                 // resource URL
-                'model.obj',
-                // called when resource is loaded
-                function ( object ) {
+                "obj/model.json",
 
-                    scene.add( object );
-
+                // onLoad callback
+                // Here the loaded data is assumed to be an object
+                function ( obj ) {
+                    obj.position.z = 10;
+                    obj.position.x = -10;
+                    obj.rotateY(-120);
+                    // Add the loaded object to the scene
+                    scene.add( obj );
                 },
-                // called when loading is in progresses
+
+                // onProgress callback
                 function ( xhr ) {
-
-                    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
+                    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
                 },
-                // called when loading has errors
-                function ( error ) {
 
-                    console.log( 'An error happened' );
-
+                // onError callback
+                function ( err ) {
+                    console.error( 'An error happened' );
                 }
             );
 
