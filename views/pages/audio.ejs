@@ -236,6 +236,17 @@
             data = analyser.getAverageFrequency();
 
 
+            function rotateObject(object,degreeX=0, degreeY=0, degreeZ=0){
+
+               degreeX = (degreeX * Math.PI)/180;
+               degreeY = (degreeY * Math.PI)/180;
+               degreeZ = (degreeZ * Math.PI)/180;
+
+               object.rotateX(degreeX);
+               object.rotateY(degreeY);
+               object.rotateZ(degreeZ);
+
+            }
             // model
                 var onProgress = function ( xhr ) {
                     if ( xhr.lengthComputable ) {
@@ -254,7 +265,11 @@
                     objLoader.setMaterials( materials );
                     objLoader.setPath( 'obj/' );
                     objLoader.load( 'Z2.obj', function ( object ) {
+                        rotateObject(object, 90,0,270);
                         object.position.z = 0;
+                        object.position.x = 0;
+                        object.position.y=0;
+
                         scene.add( object );
                     }, onProgress, onError );
                 });
