@@ -360,15 +360,23 @@
 
                      if(come == "true" ) {
                         astronaut.position.z -= 0.10;
-                        astronaut.position.x -= 0.02;
-                        astronaut.rotation.y -= arraydata[4] / 10000;
-                        astronaut.rotation.x -= arraydata[6] / 50000;
+                        dirVal = Math.floor(Math.random() * 2) + 1
+                        if(dirVal == 1)
+                            astronaut.position.x -= 0.01;
+                        if(dirVal == 2)
+                            astronaut.position.x += 0.01;
+                        astronaut.rotation.y -= arraydata[6] / (Math.floor(Math.random() * 15000) + 12000);
+                        astronaut.rotation.x -= arraydata[1] / (Math.floor(Math.random() * 50000) + 30000);
                     }
                     if (come == "false"){
-                        astronaut.position.x += 0.01;
+                        dirVal = Math.floor(Math.random() * 2) + 1
+                        if(dirVal == 1)
+                            astronaut.position.x -= 0.01;
+                        if(dirVal == 2)
+                            astronaut.position.x += 0.01;
                         astronaut.position.z += 0.10;
-                        astronaut.rotation.y += arraydata[4] / 10000;
-                        astronaut.rotation.x += arraydata[6] / 50000;
+                        astronaut.rotation.y += arraydata[1] / (Math.floor(Math.random() * 15000) + 12000);
+                        astronaut.rotation.x += arraydata[6] / (Math.floor(Math.random() * 50000) + 30000);
                     }
                     if(astronaut.position.z >= 0){
                         come="true";
@@ -378,8 +386,6 @@
                     }
 
                 }
-               
-                console.log (astronaut.position.z);
       
             }
 
