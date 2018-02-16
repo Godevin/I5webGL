@@ -360,8 +360,20 @@
             if (typeof astronaut != 'undefined'){
                 astronaut.rotation.y += arraydata[4] / 10000;
                 astronaut.rotation.x += arraydata[6] / 50000;
-                astronaut.position.x += 0.01;
-                astronaut.position.z += 0.10;
+                if(arraydata[0] != 0 || arraydata[1] != 0 || arraydata[2] != 0 || arraydata[3] != 0 || arraydata[4] != 0 || arraydata[5] != 0){
+
+                     if(astronaut.position.z == 20 || astronaut.position.z > 20 ) {
+                    astronaut.position.z -= 0.10;
+                    astronaut.position.x -= 0.01;
+                    }
+                    else{
+                        astronaut.position.x += 0.01;
+                        astronaut.position.z += 0.10;
+                    }
+
+                }
+               
+                console.log (astronaut.position.z);
       
             }
 
