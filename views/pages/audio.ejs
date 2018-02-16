@@ -267,16 +267,16 @@
                     var objLoader = new THREE.OBJLoader();
                     objLoader.setMaterials( materials );
                     objLoader.setPath( 'obj/' );
-                    objLoader.load( 'redlegodude.obj', function ( object ) {
+                    animation = objLoader.load( 'redlegodude.obj', function ( object ) {
 
                         object.position.z = -100;
-                        object.scale.set( 1000, 1000, 1000);
+                        object.scale.set( 1100, 1100, 1100);
 
                         scene.add( object );
                     }, onProgress, onError );
                 });
 
-            renderer = new THREE.WebGLRenderer({ alpha: true, premultipliedAlpha: false });
+            renderer = new THREE.WebGLRenderer({ alpha: true, antialias:true, premultipliedAlpha: false });
             renderer.setClearColor(0x000000, 0);
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
