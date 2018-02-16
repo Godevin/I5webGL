@@ -268,8 +268,8 @@
                     objLoader.setMaterials( materials );
                     objLoader.setPath( 'obj/' );
                     objLoader.load( 'redlegodude.obj', function ( object ) {
-                        object.position.z = -70;
-                        object.scale.set( 1000, 1000, 1000);
+                        object.position.z = -80;
+                        object.scale.set( 800, 800, 800);
 
                         scene.add( object );
                         astronaut = object;
@@ -359,6 +359,10 @@
 
             if (typeof astronaut != 'undefined'){
                 astronaut.rotation.y += arraydata[4] / 10000;
+                astronaut.rotation.x += arraydata[6] / 50000;
+                astronaut.position.x += 0.01;
+                astronaut.position.z += 0.10;
+      
             }
 
             if (newaction) {
