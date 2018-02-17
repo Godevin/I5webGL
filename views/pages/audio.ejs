@@ -22,6 +22,14 @@
             <button class="start" onclick="start()" id="Start" disabled>Start</button>
         </div>
     </div>
+    <div class="pause">
+            <div class="center">
+                <div style="margin-top: 30vh;">
+                    <p>PAUSE</p>
+                </div>
+            </div>
+    </div>
+
 
 
     <script src="three.min.js"></script>
@@ -77,9 +85,11 @@
                     newaction = true;
                     if (isStop == false) {
                         isStop = true;
+                        $('.pause').css('display', 'block');
                     }
                     else {
                         isStop = false;
+                        $('.pause').css('display', 'none');
                     }
                 }
             });
@@ -395,6 +405,7 @@
                 }
                 else {
                     sound.play();
+
                 }
                 newaction = false;
             }

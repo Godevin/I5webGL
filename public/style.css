@@ -15,6 +15,20 @@ body{
     background-color: #000000;
 }
 
+.pause p {
+  font-size: 80px;
+  font-family: streamster;
+  z-index: 9999;
+  font-weight: bold;
+}
+
+.pause {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
 h5.textIntro p{
   font-family: streamster;
   font-size:80px;
