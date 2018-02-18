@@ -20,6 +20,8 @@
             <input id="file-upload" type="file" />
 
             <button class="start" onclick="start()" id="Start" disabled>Start</button>
+
+            <p class="informations"><b>SPACE :</b> Pause the song<br><b>F11 :</b> Fullscreen and no fullscreen<br><b>Enter :</b> Back here</p>
         </div>
     </div>
     <div class="pause">
@@ -91,6 +93,9 @@
                         isStop = false;
                         $('.pause').css('display', 'none');
                     }
+                }
+                if (e.keyCode == 13) {
+                    location.reload();
                 }
             });
 
