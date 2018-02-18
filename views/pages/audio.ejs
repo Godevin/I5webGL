@@ -104,7 +104,7 @@
         }
 
         function init() {
-            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 120);
+            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1100);
             camera.position.z = 20;
             var pointLight = new THREE.PointLight( 0xcccccc, 0.8 );
             pointLight.position.y += 50;
@@ -221,6 +221,16 @@
             particleSystem3.sortParticles = true;
 
             scene.add(particleSystem3);
+
+            // Add background
+            var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+            // invert the geometry on the x-axis so that all of the faces point inward
+            geometry.scale( - 1, 1, 1 );
+            var material = new THREE.MeshBasicMaterial( {
+                map: new THREE.TextureLoader().load( 'test360.jpg' )
+            } );
+            mesh = new THREE.Mesh( geometry, material );
+            scene.add( mesh );
 
 
             // create an AudioListener and add it to the camera
