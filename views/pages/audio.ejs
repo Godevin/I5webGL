@@ -381,28 +381,18 @@
 
                      if(come == "true" ) {
                         astronaut.position.z -= 0.10;
-                        dirVal = Math.floor(Math.random() * 2) + 1
-                        if(dirVal == 1)
-                            astronaut.position.x -= 0.01;
-                        if(dirVal == 2)
-                            astronaut.position.x += 0.01;
-                        astronaut.rotation.y -= arraydata[6] / (Math.floor(Math.random() * 15000) + 12000);
-                        astronaut.rotation.x -= arraydata[1] / (Math.floor(Math.random() * 50000) + 30000);
+                        astronaut.rotation.y -= arraydata[6] / 10000;
+                        astronaut.rotation.x -= arraydata[1] / 10000;
                     }
                     if (come == "false"){
-                        dirVal = Math.floor(Math.random() * 2) + 1
-                        if(dirVal == 1)
-                            astronaut.position.x -= 0.01;
-                        if(dirVal == 2)
-                            astronaut.position.x += 0.01;
                         astronaut.position.z += 0.10;
-                        astronaut.rotation.y += arraydata[1] / (Math.floor(Math.random() * 15000) + 12000);
-                        astronaut.rotation.x += arraydata[6] / (Math.floor(Math.random() * 50000) + 30000);
+                        astronaut.rotation.y += arraydata[1] / 10000;
+                        astronaut.rotation.x += arraydata[6] / 10000;
                     }
-                    if(astronaut.position.z >= 0){
+                    if(astronaut.position.z >= 175){
                         come="true";
                     }
-                    if(astronaut.position.z <= -80){
+                    if(astronaut.position.z <= -175){
                         come="false";
                     }
                     //Background 360
