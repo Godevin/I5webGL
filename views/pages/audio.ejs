@@ -20,6 +20,9 @@
             <input id="file-upload" type="file" />
 
             <button class="start" onclick="start()" id="Start" disabled>Start</button>
+            <br><br><br>
+             <label style="display: inline-block;" class="informations"><input type="checkbox" id="antialiasing" name="checkbox">Antialiasing</label>
+            <br><br>
 
             <p class="informations"><b>Mouse : </b>Control the camera<br><b>SPACE :</b> Pause the song<br><b>F11 :</b> Fullscreen and no fullscreen<br><b>Enter :</b> Back here</p>
         </div>
@@ -294,7 +297,14 @@
                     }, onProgress, onError );
                 });
 
-            renderer = new THREE.WebGLRenderer({ alpha: true, premultipliedAlpha: false });
+            //Antialiasing
+            if ($('#antialiasing').is(":checked")){
+                renderer = new THREE.WebGLRenderer({ alpha: true, premultipliedAlpha: false, antialias:true  });
+            }
+            else{
+                renderer = new THREE.WebGLRenderer({ alpha: true, premultipliedAlpha: false});
+            }
+
             renderer.setClearColor(0x000000, 0);
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
