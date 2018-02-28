@@ -321,11 +321,11 @@
             // Blue particles rotation & sizing
             if (blueRotate == "plus") {
                 particleSystem1.rotation.y += arraydata[1] / 15000;
-                // particleSystem1.rotation.x -= arraydata[1] / 20000;
+                particleSystem1.rotation.x -= arraydata[1] / 100000;
             }
 
             if (blueRotate == "minus") {
-                particleSystem1.rotation.y -= arraydata[1] / 15000;
+                particleSystem1.rotation.y += arraydata[1] / 15000;
                 // particleSystem1.rotation.x += arraydata[1] / 20000;
             }
 
@@ -335,7 +335,7 @@
                     blueRotate = "minus"
             }
             else {
-                if (particleSystem1['material'].size > 1)
+                if (particleSystem1['material'].size > 0)
                     particleSystem1['material'].size -= 1;
                 if (particleSystem1['material'].size == 1)
                     blueRotate = "plus"
