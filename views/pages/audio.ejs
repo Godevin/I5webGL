@@ -131,7 +131,7 @@
                 scene.add( camera )
 
 
-            var particleCount1 = 3000,
+            var particleCount1 = 1000,
                 particles1 = new THREE.Geometry(),
                 pMaterial1 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
@@ -163,7 +163,7 @@
             scene.add(particleSystem1);
 
 
-            var particleCount2 = 2000,
+            var particleCount2 = 1000,
                 particles2 = new THREE.Geometry(),
                 pMaterial2 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
@@ -321,17 +321,17 @@
             // Blue particles rotation & sizing
             if (blueRotate == "plus") {
                 particleSystem1.rotation.y += arraydata[1] / 15000;
-                particleSystem1.rotation.x -= arraydata[1] / 20000;
+                // particleSystem1.rotation.x -= arraydata[1] / 20000;
             }
 
             if (blueRotate == "minus") {
                 particleSystem1.rotation.y -= arraydata[1] / 15000;
-                particleSystem1.rotation.x += arraydata[1] / 20000;
+                // particleSystem1.rotation.x += arraydata[1] / 20000;
             }
 
-            if (arraydata[1] >= 235 && particleSystem1['material'].size <= 7) {
+            if (arraydata[1] >= 235 && particleSystem1['material'].size <= 11) {
                 particleSystem1['material'].size += 1;
-                if (particleSystem1['material'].size == 7)
+                if (particleSystem1['material'].size == 11)
                     blueRotate = "minus"
             }
             else {
@@ -350,10 +350,10 @@
                 particleSystem2.rotation.y -= arraydata[4] / 10000;
             }
 
-            if (arraydata[4] >= 170 && particleSystem2['material'].size <= 8) {
+            if (arraydata[4] >= 165 && particleSystem2['material'].size <= 12) {
 
                 particleSystem2['material'].size += 1;
-                if (particleSystem2['material'].size == 8)
+                if (particleSystem2['material'].size == 12)
                     orangeRotate = "plus"
             }
             else {
@@ -372,9 +372,9 @@
                 particleSystem3.rotation.y -= arraydata[6] / 10000;
             }
 
-            if (arraydata[6] >= 140 && particleSystem3['material'].size <= 12) {
+            if (arraydata[6] >= 140 && particleSystem3['material'].size <= 15) {
                 particleSystem3['material'].size += 1;
-                if (particleSystem3['material'].size == 12)
+                if (particleSystem3['material'].size == 15)
                     pinkRotate = "minus"
             }
             else {
