@@ -20,9 +20,11 @@
             <input id="file-upload" type="file" />
 
             <button class="start" onclick="start()" id="Start" disabled>Start</button>
-            <br><br><br>
-             <label style="display: inline-block;" class="informations"><input type="checkbox" id="antialiasing" name="checkbox">Antialiasing</label>
             <br><br>
+             <label style="display: inline-block;" class="informations"><input type="checkbox" id="antialiasing" name="checkbox">Antialiasing</label>
+             <br>
+            <label style="display: inline-block;" class="informations"><input type="checkbox" id="postmode1" name="checkbox">Windows 3.1</label>
+            <br>
 
             <p class="informations"><b>Mouse : </b>Control the camera<br><b>SPACE :</b> Pause the song<br><b>F11 :</b> Fullscreen and no fullscreen<br><b>Enter :</b> Back here</p>
         </div>
@@ -43,9 +45,18 @@
     <script src="DDSLoader.js"></script>
     <script src="OrbitControls.js"></script>
 
+    <script src="CopyShader.js"></script>
+    <script src="DotScreenShader.js"></script>
+    <script src="RGBShiftShader.js"></script>
+
+    <script src="EffectComposer.js"></script>
+    <script src="RenderPass.js"></script>
+    <script src="ShaderPass.js"></script>
+
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript">
         var camera, scene, renderer;
+        var composer;
         var geometry, material, mesh;
         var particleSystem;
         var data;
@@ -61,6 +72,7 @@
         var come="false";
         var newaction = false;
         var astronaut;
+        var ispostprocess = false;
 
         $("#file-upload").change(function () {
             console.log(this.files)
@@ -298,11 +310,25 @@
                 });
 
             //Antialiasing
-            if ($('#antialiasing').is(":checked")){
+            if ($('#antialiasing').is(":checked")) {
                 renderer = new THREE.WebGLRenderer({ alpha: true, premultipliedAlpha: false, antialias:true  });
             }
             else{
                 renderer = new THREE.WebGLRenderer({ alpha: true, premultipliedAlpha: false});
+            }
+
+            if ($('#postmode1').is(":checked")) {
+            ispostprocess = true;
+            // postprocessing
+                composer = new THREE.EffectComposer( renderer );
+                composer.addPass( new THREE.RenderPass( scene, camera ) );
+                var effect = new THREE.ShaderPass( THREE.DotScreenShader );
+                effect.uniforms[ 'scale' ].value = 64;
+                composer.addPass( effect );
+                var effect = new THREE.ShaderPass( THREE.RGBShiftShader );
+                effect.uniforms[ 'amount' ].value = 0.0075;
+                effect.renderToScreen = true;
+                composer.addPass( effect );
             }
 
             renderer.setClearColor(0x000000, 0);
@@ -424,7 +450,13 @@
             }
 
             // draw
-            renderer.render(scene, camera);
+            if (ispostprocess == true) {
+                composer.render();
+            }
+            else{
+                renderer.render(scene, camera);
+            }
+
 
             // set up the next call
             requestAnimationFrame(animate);
