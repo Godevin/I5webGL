@@ -4,6 +4,8 @@ const app = express()
 var server = require('http').Server(app)
 var io = require('socket.io').listen(server)
 var util = require('./util');
+var fs = require('fs');
+var path = require('path');
 
 server.listen(3000)
 
@@ -56,5 +58,14 @@ app.get('/firetweets', function (req, res) {
 })
 
 app.get('/audio', function (req, res) {
-    res.render('pages/audio');
+    var files = fs.readdirSync('public');
+    var filesFiltered = [];
+    for (var i = 0; i < files.length; i++) {
+        var filename = path.join('public', files[i]);
+        var stat = fs.lstatSync(filename);
+        if (filename.indexOf('.mp3') >= 0) {
+            filesFiltered.push(filename);
+        };
+    };
+    res.render('pages/audio', { files: filesFiltered });
 })
