@@ -131,11 +131,11 @@
                 scene.add( camera )
 
 
-            var particleCount1 = 1500,
+            var particleCount1 = 3000,
                 particles1 = new THREE.Geometry(),
                 pMaterial1 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
-                    size: 4,
+                    size: 1,
                     map: new THREE.TextureLoader().load("flashBlue.png"),
                     transparent: true,
                     depthWrite: false,
@@ -163,11 +163,11 @@
             scene.add(particleSystem1);
 
 
-            var particleCount2 = 1500,
+            var particleCount2 = 2000,
                 particles2 = new THREE.Geometry(),
                 pMaterial2 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
-                    size: 4,
+                    size: 1,
                     map: new THREE.TextureLoader().load('flashOrange.png'),
                     transparent: true,
                     depthWrite: false,
@@ -177,9 +177,9 @@
             // now create the individual particles
             for (var p = 0; p < particleCount2; p++) {
 
-                var pX = Math.random() * 300 - 150,
-                    pY = Math.random() * 300 - 150,
-                    pZ = Math.random() * 300 - 150,
+                var pX = Math.random() * 200 - 100,
+                    pY = Math.random() * 200 - 100,
+                    pZ = Math.random() * 200 - 100,
                     particle2 =
                         new THREE.Vector3(pX, pY, pZ);
 
@@ -195,11 +195,11 @@
 
             scene.add(particleSystem2);
 
-            var particleCount3 = 1500,
+            var particleCount3 = 50,
                 particles3 = new THREE.Geometry(),
                 pMaterial3 = new THREE.PointsMaterial({
                     color: 0xFFFFFF,
-                    size: 4,
+                    size: 1,
                     map: new THREE.TextureLoader().load('flashPink.png'),
                     transparent: true,
                     depthWrite: false,
@@ -208,9 +208,9 @@
             // now create the individual particles
             for (var p = 0; p < particleCount3; p++) {
 
-                var pX = Math.random() * 300 - 150,
-                    pY = Math.random() * 300 - 150,
-                    pZ = Math.random() * 300 - 150,
+                var pX = Math.random() * 100 - 50,
+                    pY = Math.random() * 100 - 50,
+                    pZ = Math.random() * 100 - 50,
                     particle3 =
                         new THREE.Vector3(pX, pY, pZ);
 
@@ -329,15 +329,15 @@
                 particleSystem1.rotation.x += arraydata[1] / 20000;
             }
 
-            if (arraydata[1] >= 235 && particleSystem1['material'].size <= 8) {
+            if (arraydata[1] >= 235 && particleSystem1['material'].size <= 7) {
                 particleSystem1['material'].size += 1;
-                if (particleSystem1['material'].size == 8)
+                if (particleSystem1['material'].size == 7)
                     blueRotate = "minus"
             }
             else {
-                if (particleSystem1['material'].size > 4)
+                if (particleSystem1['material'].size > 1)
                     particleSystem1['material'].size -= 1;
-                if (particleSystem1['material'].size == 4)
+                if (particleSystem1['material'].size == 1)
                     blueRotate = "plus"
             }
 
@@ -350,16 +350,16 @@
                 particleSystem2.rotation.y -= arraydata[4] / 10000;
             }
 
-            if (arraydata[4] >= 180 && particleSystem2['material'].size <= 8) {
+            if (arraydata[4] >= 170 && particleSystem2['material'].size <= 8) {
 
                 particleSystem2['material'].size += 1;
                 if (particleSystem2['material'].size == 8)
                     orangeRotate = "plus"
             }
             else {
-                if (particleSystem2['material'].size > 4)
+                if (particleSystem2['material'].size > 1)
                     particleSystem2['material'].size -= 1;
-                if (particleSystem2['material'].size == 4)
+                if (particleSystem2['material'].size == 1)
                     orangeRotate = "minus"
             }
             
@@ -372,15 +372,15 @@
                 particleSystem3.rotation.y -= arraydata[6] / 10000;
             }
 
-            if (arraydata[6] >= 130 && particleSystem3['material'].size <= 8) {
+            if (arraydata[6] >= 140 && particleSystem3['material'].size <= 12) {
                 particleSystem3['material'].size += 1;
-                if (particleSystem3['material'].size == 8)
+                if (particleSystem3['material'].size == 12)
                     pinkRotate = "minus"
             }
             else {
-                if (particleSystem3['material'].size > 4)
+                if (particleSystem3['material'].size > 1)
                     particleSystem3['material'].size -= 1;
-                if (particleSystem3['material'].size == 4)
+                if (particleSystem3['material'].size == 1)
                     pinkRotate = "plus"
             }
 
