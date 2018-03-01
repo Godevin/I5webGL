@@ -8,6 +8,7 @@
 
 <body>
 
+    <div id="tweets" style="color:white;font-family:Helvetica;text-align:center;"></div>
 
     <script src="three.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
@@ -17,7 +18,7 @@
         var movementSpeed = 80;
         var totalObjects = 200;
         var objectSize = 10;
-        var sizeRandomness = 4000;
+        var sizeRandomness = 2000;
         var colors = [0xFF0FFF, 0xCCFF00, 0xFF000F, 0x996600, 0xFFFFFF];
         /////////////////////////////////
         var dirs = [];
@@ -56,33 +57,6 @@
 
             scene.add(this.object);
 
-            //////
-
-            /*var loader = new THREE.FontLoader();
-
-            loader.load('helvetiker_bold.typeface.json', function (font) {
-
-                var textGeo = new THREE.TextGeometry("My Text", {
-                    font: font,
-                    size: 200,
-                    height: 50,
-                    curveSegments: 12,
-                    bevelThickness: 2,
-                    bevelSize: 5,
-                    bevelEnabled: true
-                });
-
-                var textMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 });
-
-                var mesh = new THREE.Mesh(textGeo, textMaterial);
-                mesh.position.set(x, y, 0);
-                
-                scene.add(mesh);
-
-            });*/
-
-            /////
-
             this.update = function () {
                 if (this.status == true) {
                     var pCount = totalObjects;
@@ -103,7 +77,6 @@
         container.appendChild(renderer.domElement);
 
         renderer.render(scene, camera);
-        parts.push(new ExplodeAnimation(0, 0));
         render();
 
         function render() {
@@ -138,19 +111,18 @@
 
         var socket = io.connect('/'),
             tweets = document.getElementById('tweets');
-        //var queue = [];
+        var queue = [];
 
         socket.on('tweet', function (data) {
 
-            /*  if (queue.length < 5) {
-                  queue.push(data);
-                  tweets.innerHTML = tweets.innerHTML + '<br>' + data.user + ' :  ' + data.location + ' : ' + data.tweet;*/
-            onclick();
-            /*} else {
+            if (queue.length < 5) {
+                queue.push(data);
+                tweets.innerHTML = tweets.innerHTML + '<br><b>' + data.user + '</b> :  ' + data.tweet;
+                onclick();
+            } else {
                 queue.shift();
                 tweets.innerHTML = tweets.innerHTML.substring(tweets.innerHTML.indexOf('<br>') + 4);
-            }*/
-            //console.log(data)
+            }
 
         });
     </script>

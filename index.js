@@ -27,7 +27,7 @@ var T = new Twit({
     access_token_secret: '6BXiFoqL9gwYrXhi1ULTdvSBhHkxhnp0uTiQJa8EJ5iD8',
     timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
 })
-var paramTweetVar = 'trump';
+var paramTweetVar = 'france';
 
 var stream = T.stream('statuses/filter', { track: paramTweetVar })
 
