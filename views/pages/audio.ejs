@@ -15,12 +15,14 @@
                 </h5>
             </div>
             <label for="file-upload" class="custom-file-upload">
-                Audio File
+                Choisissez un fichier audio
             </label>
             <input id="file-upload" type="file" />
-            <br/>ou
+            <br/>
+                OU
             <br/>
             <select id="selectMusic">
+                <option id="null" disabled selected>-- Faites un choix --</option>
                 <%for (var file in files){%>
                     <option id="<%=file%>">
                         <%=files[file].substring(7,files[file].length - 4)%>
